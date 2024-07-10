@@ -1,0 +1,22 @@
+:root {
+  --primary-color: #004eda;
+  --secondary-color: #f2f2f8;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  display: grid;
+  grid-template-columns: 15em 1fr;
+  grid-template-rows: 4em;
+}
+.nav-main {
+  grid-row: 1 / -1;
+  grid-column: 1 / 2;
+}
+.top {
+  grid-row: 1;
+  grid-column: 2 / -1;
+}
+main {
+  grid-row: 2 / 1;
+  grid-column: 2 / -1;
+}
