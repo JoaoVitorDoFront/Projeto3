@@ -1,22 +1,51 @@
 :root {
   --primary-color: #004eda;
   --secondary-color: #f2f2f8;
+  --default-padding: 2rem;
 }
 body {
   font-family: "Poppins", sans-serif;
   display: grid;
   grid-template-columns: 15em 1fr;
-  grid-template-rows: 4em;
+  grid-template-rows: 4em auto;
+  margin: 0;
 }
-.nav-main {
+.mainNav {
   grid-row: 1 / -1;
   grid-column: 1 / 2;
+  background-color: aquamarine;
 }
-.top {
-  grid-row: 1;
+img {
+  max-width: 100%;
+}
+.topnav {
+  grid-row: 1 / 2;
   grid-column: 2 / -1;
+  background-color: red;
 }
 main {
-  grid-row: 2 / 1;
+  grid-row: 2 / -1;
   grid-column: 2 / -1;
+  background-color: blue;
+}
+.nav-main_logo {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-left: var(--default-padding);
+  padding-top: var(--default-padding);
+  display: inline-block;
+}
+.mainNav_menu,
+.topnav_menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding-left: var(--default-padding);
+}
+.mainNav_menus {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
