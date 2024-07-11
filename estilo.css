@@ -2,18 +2,34 @@
   --primary-color: #004eda;
   --secondary-color: #f2f2f8;
   --default-padding: 2rem;
+  --color: #111;
 }
 body {
   font-family: "Poppins", sans-serif;
   display: grid;
-  grid-template-columns: 15em 1fr;
+  grid-template-columns: max-content 1fr;
+  /* grid-template-columns: 15em 1fr; */
+  /* troquei o tamanho q tava antes e coloquei max content pra caso o conteudo for maior ele aumentar tmb */
   grid-template-rows: 4em auto;
+  grid-template-rows: 4em minmax(calc(100vh - 4em), auto);
   margin: 0;
+  color: var(--color);
 }
 .mainNav {
   grid-row: 1 / -1;
   grid-column: 1 / 2;
-  background-color: aquamarine;
+  background-color: white;
+  /* estou usando um display flex e um direction column pra nao ficar estranho, tenho q usar nessa classe aq pq ela é o pái do mainnav_menus, logo ele vai ter 1 flex grow 1 q vai ocupar o espaço todo e um space between q vai ficar cada um num lugar */
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+  padding-right: var(--default-padding);
+}
+
+.mainNav_menu li {
+  margin-top: 0.5rem;
 }
 img {
   max-width: 100%;
@@ -21,12 +37,23 @@ img {
 .topnav {
   grid-row: 1 / 2;
   grid-column: 2 / -1;
-  background-color: red;
+  background-color: white;
 }
 main {
   grid-row: 2 / -1;
   grid-column: 2 / -1;
-  background-color: blue;
+  background-color: var(--secondary-color);
+  display: grid;
+  gap: var(--default-padding);
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  padding: var(--default-padding);
+}
+main > * {
+  grid-column: 1 / -1;
+}
+main > .grid-half {
+  grid-column: span 1;
 }
 .nav-main_logo {
   text-decoration: none;
@@ -37,6 +64,7 @@ main {
   padding-top: var(--default-padding);
   display: inline-block;
 }
+
 .mainNav_menu,
 .topnav_menu {
   list-style-type: none;
@@ -44,8 +72,101 @@ main {
   margin: 0;
   padding-left: var(--default-padding);
 }
+.mainNav_menu a,
+.topnav_menu a {
+  /* se eu nao tivesse pegado a tag (a) ele n teria funcionado esse color e o text decoration, só da certo se especificar q é o (a) */
+  text-decoration: none;
+  color: #5a5a5f;
+}
+.mainNav_menu {
+  margin-bottom: 1.5em;
+}
 .mainNav_menus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* pra dar certo esse flex grow 1 o pai do mainnav_menus tem q ser um display flex, logo vou aplicar um display flex no mainnav */
+  flex-grow: 1;
+  padding-top: 2em;
+}
+.topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topnav_menu {
+  display: flex;
+  gap: var(--default-padding);
+}
+.profile {
+  margin-right: var(--default-padding);
+  /* tive q colocar um display flex aq pra poder tentar colocar a imagem e as descriçoes juntas, ok */
+  display: flex;
+  /* adicionei um height de 100 pra defiinir q meu tamanho vai ser de 100 pra tudo q tiver nessa classe profile */
+  height: 100%;
+  align-items: center;
+}
+.name {
+  font-weight: 600;
+}
+.worker {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color), transparent 60%);
+}
+.profile_logo {
+  /* dps eu vim e testei uma altura e vi q tava mudando o tamanho da imagem, depois eu fui especificamente nessa classe e na tag img e falei q a altura é de 100% pra ela aparecer toda, logo após eu vim ca e mudei o tamanho da altura pra ela ficar no tamanho decente pra caber no header */
+  height: 3.5em;
+  /* coloquei um height de 100 tmb pra ele ocupar os 100% da altura q tem 100% */
+  /* mas eu n precisava ter feito isso, só fiz pra poder colocar um padding */
+  height: 100%;
+  padding: 0.5em 0;
+  /* porem somente o padding n vai dar certo eu necessito colocar um box sizing pra ele n ficar faltando espaço */
+  box-sizing: border-box;
+}
+.profile_logo img {
+  /* falei q minha imagem tem 100%, logo ela vai mostrar ela toda */
+  height: 100%;
+  margin-right: calc(var(--default-padding) / 2);
+}
+.bi {
+  font-size: 1.4em;
+  margin-right: 0.2em;
+}
+.summary {
+  background-color: white;
+  display: flex;
+  padding: calc(var(--default-padding) / 2) var(--default-padding);
+  /* aq eu falei q o pad top e bot é 1em e dos lados é 2 */
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+.summary article {
+  padding: calc(var(--default-padding) / 2) 0;
+  /* aq eu so mudei top e bottom pra poder aumentar a bordinha e deixei o pad 0 dos lados  */
+}
+.number {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  padding-left: var(--default-padding);
+}
+.description {
+  color: color-mix(in srgb, var(--color), transparent 40%);
+}
+.separado {
+  /* criei uma div separando os conteudos pra eu poder colocar um border tive q colocar um tamanho de 2px uma cor e alig selft strectch */
+  width: 2px;
+  background-color: var(--secondary-color);
+  align-self: stretch;
+}
+.btn {
+  text-decoration: none;
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  padding: calc(var(--default-padding) / 2) var(--default-padding);
+}
+figure {
+  margin: 0;
 }
